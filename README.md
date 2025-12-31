@@ -1,1 +1,99 @@
-# happy
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>新年快乐</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    background:#6b0000;
+    color:white;
+    font-family:"PingFang SC","Microsoft JhengHei",sans-serif;
+    text-align:center;
+    overflow:hidden;
+}
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:0;
+}
+.container{
+    position:relative;
+    z-index:1;
+    margin-top:28vh;
+}
+h1{font-size:2.6rem;}
+p{font-size:1.3rem;line-height:1.9;}
+button{
+    margin-top:20px;
+    padding:10px 18px;
+    border:none;
+    border-radius:20px;
+    background:#ffd700;
+    font-size:1rem;
+}
+</style>
+</head>
+
+<body>
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+    <h1 id="title">新年快乐</h1>
+    <p id="text">
+        祝您身体健康，<br>
+        万事如意，<br>
+        心想事成。
+    </p>
+    <button onclick="toggle()">中 / EN</button>
+</div>
+
+<script>
+let zh=true;
+function toggle(){
+    if(zh){
+        title.innerHTML="Happy New Year";
+        text.innerHTML=
+        "Wishing you good health,<br>" +
+        "peace and happiness,<br>" +
+        "and all the best.";
+    }else{
+        title.innerHTML="新年快乐";
+        text.innerHTML=
+        "祝您身体健康，<br>" +
+        "万事如意，<br>" +
+        "心想事成。";
+    }
+    zh=!zh;
+}
+
+// 稳重烟花
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+setInterval(()=>{
+    ctx.fillStyle="rgba(0,0,0,0.25)";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*canvas.height*0.5;
+
+    for(let i=0;i<20;i++){
+        ctx.beginPath();
+        ctx.arc(
+            x+Math.random()*30-15,
+            y+Math.random()*30-15,
+            2,
+            0,Math.PI*2
+        );
+        ctx.fillStyle="#ffd700";
+        ctx.fill();
+    }
+},900);
+</script>
+</body>
+</html>
